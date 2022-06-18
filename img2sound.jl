@@ -78,13 +78,6 @@ else
                                      length=size(image_data, 1)))
 end
 
-if args["randomphases"]
-    # Randomize phases
-    phases = (2 * π) .* rand(size(stft_data)...)
-    factors = exp.(1im * phases)
-    stft_data = stft_data.*factors
-end
-
 # Copy the values from the image to the corresponding STFT values based
 # on the conversion table
 for line_nr ∈ 1:size(stft_data, 2)
@@ -92,6 +85,13 @@ for line_nr ∈ 1:size(stft_data, 2)
     for y ∈ 1:size(line, 1)
         stft_data[conv_table[y], line_nr] = line[y]
     end
+end
+
+if args["randomphases"]
+    # Randomize phases
+    phases = (2 * π) .* rand(size(stft_data)...)
+    factors = exp.(1im * phases)
+    stft_data = stft_data .* factors
 end
 
 # Do the Inverse Short-time FFT
