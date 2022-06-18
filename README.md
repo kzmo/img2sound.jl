@@ -30,3 +30,18 @@ Optional arguments:
   - **--randomphases**     Randomize phases.
   - **--overlap OVERLAP**  ISTFT block overlap. Defaults to 0.75 blocks (type: Float64, default: 0.75)
   - **-h**, **--help**         show this help message and exit
+
+## Hints
+
+The length of the generated sound file depends on the sampling frequency,
+FFT block size and block overlap. It can be calculated by the formula:
+
+``` console
+Length in seconds = 2 * (FFT block size *  image horizontal resolution) * (1 - overlap) / sample rate
+```
+
+The higher the FFT block size the more vertical resolution there is.
+
+If the sound starts pulsating you can try to increase the overlap.
+
+Phase randomization can help with phase cancellation.

@@ -96,7 +96,7 @@ end
 
 # Do the Inverse Short-time FFT
 sound_data = istft(Real, stft_data; nfft=nperseg * 2,
-                   noverlap=Int64(round(nperseg * overlap)),
+                   noverlap=Int64(round(2 * nperseg * overlap)),
                    window=hanning)
 
 # Remove the DC level
